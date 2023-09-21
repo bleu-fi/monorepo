@@ -110,6 +110,7 @@ export const getDataFromCacheOrCompute = async <T>(
     }
     return computedData;
   }
+
   try {
     const cached = await KV.get<T>(cacheKey);
 

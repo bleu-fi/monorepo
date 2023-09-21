@@ -3,7 +3,6 @@ import { Suspense } from "react";
 
 import ChartSkelton from "#/app/apr/(components)/(skeleton)/ChartSkelton";
 import KpisSkeleton from "#/app/apr/(components)/(skeleton)/KpisSkeleton";
-import TableSkeleton from "#/app/apr/(components)/(skeleton)/TableSkeleton";
 import { formatDateToMMDDYYYY } from "#/app/apr/api/(utils)/date";
 import { QueryParamsPagesSchema } from "#/app/apr/api/(utils)/validate";
 import { SearchParams } from "#/app/apr/page";
@@ -11,7 +10,6 @@ import Breadcrumb from "#/app/apr/round/(components)/Breadcrumb";
 
 import HistoricalCharts from "../../(components)/HistoricalCharts";
 import PoolOverviewCards from "../../(components)/PoolOverviewCards";
-import PoolTokens from "../../(components)/PoolTokens";
 import { YieldWarning } from "../../(components)/YieldWarning";
 
 export default async function Page({
@@ -54,9 +52,9 @@ export default async function Page({
           endAt={endAtDate}
         />
       </Suspense>
-      <Suspense fallback={<TableSkeleton colNumbers={2} />}>
+      {/* <Suspense fallback={<TableSkeleton colNumbers={2} />}>
         <PoolTokens startAt={startAtDate} endAt={endAtDate} poolId={poolId} />
-      </Suspense>
+      </Suspense> */}
     </div>
   );
 }

@@ -10,6 +10,7 @@ import { formatDateToMMDDYYYY } from "./date";
 
 export async function fetchDataForPoolId(poolId: string) {
   const pool = new Pool(poolId);
+  // TODO: this should be the date the pool had been added
   const gaugeAddedDate = new Date(pool.gauge.addedTimestamp * 1000);
   const roundGaugeAddedStartDate =
     Round.getRoundByDate(gaugeAddedDate).startDate;

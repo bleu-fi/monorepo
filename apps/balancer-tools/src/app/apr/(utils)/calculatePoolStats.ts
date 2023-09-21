@@ -37,7 +37,7 @@ const fetchPoolAveragesInRange = withCache(
     poolId: string,
     network: string,
     from: number,
-    to: number,
+    to: number
   ): Promise<[number, number, string, { symbol: string; balance: string }[]]> {
     const res = await pools.gql(network).poolSnapshotInRange({
       poolId,
@@ -46,7 +46,7 @@ const fetchPoolAveragesInRange = withCache(
     });
 
     res.poolSnapshots = res.poolSnapshots.sort(
-      (a, b) => a.timestamp - b.timestamp,
+      (a, b) => a.timestamp - b.timestamp
     );
 
     if (res.poolSnapshots.length === 0) {
@@ -56,7 +56,7 @@ const fetchPoolAveragesInRange = withCache(
     const avgLiquidity =
       res.poolSnapshots.reduce(
         (acc, snapshot) => acc + parseFloat(snapshot.liquidity),
-        0,
+        0
       ) / res.poolSnapshots.length;
 
     const avgVolume =
@@ -77,30 +77,30 @@ const fetchPoolAveragesInRange = withCache(
       res.poolSnapshots[0].pool.symbol ?? "",
       res.poolSnapshots[0].pool.tokens ?? [],
     ];
-  },
+  }
 );
 
-async function calculateTokensStats(
+const calculateTokensStats = async function calculateTokensStatsFn(
   round: Round,
   poolTokenData: PoolTokens[],
   poolNetwork: string,
-  tokenBalance: { symbol: string; balance: string }[],
+  tokenBalance: { symbol: string; balance: string }[]
 ) {
   const tokensPrices = await Promise.all(
     poolTokenData.map(async (token) => {
       const tokenPrice = await getTokenPriceByDate(
         round.endDate,
         token.address,
-        parseInt(poolNetwork),
+        parseInt(poolNetwork)
       );
       if (tokenPrice === undefined) {
         console.warn(
-          `Failed fetching price for ${token.symbol}, with address ${token.address}`,
+          `Failed fetching price for ${token.symbol}, with address ${token.address}`
         );
       }
       //TODO: some work arround to get token price
       return tokenPrice === undefined ? 1 : tokenPrice;
-    }),
+    })
   );
 
   const totalValue = poolTokenData.reduce((acc, token, idx) => {
@@ -124,87 +124,94 @@ async function calculateTokensStats(
   return Promise.all(tokenPromises);
 }
 
-export async function calculatePoolStats({
-  round,
-  poolId,
-}: {
-  round: Round;
-  poolId: string;
-}): Promise<calculatePoolData> {
-  const pool = new Pool(poolId);
-  const network = String(pool.network ?? 1);
-
-  const [
-    balPriceUSD,
-    [tvl, volume, symbol, tokenBalance],
-    votingShare,
-    [feeAPR, collectedFeesUSD],
-    tokensAPR,
-  ] = await Promise.all([
-    getBALPriceByRound(round.startDate, round.endDate),
-    fetchPoolAveragesInRange(
-      poolId,
-      network,
-      round.startDate.getTime() / 1000,
-      round.endDate.getTime() / 1000,
-    ),
-    getPoolRelativeWeight(poolId, round.endDate.getTime() / 1000),
-    getFeeApr(
-      poolId,
-      network,
-      round.startDate.getTime() / 1000,
-      round.endDate.getTime() / 1000,
-    ),
-    //TODO: on #BAL-795 use another strategy for cache using the poolId
-    getPoolTokensAprForDate(
-      network,
-      poolId as Address,
-      //Currently, this is calculating the APR on the last day of the round.
-      //This should be changed on #BAL-799
-      round.activeRound
-        ? Math.round(new Date().getTime() / 1000)
-        : round.endDate.getTime() / 1000,
-    ),
-  ]);
-
-  const tokens = await calculateTokensStats(
-    round,
-    pool.tokens,
-    network,
-    tokenBalance,
-  );
-
-  const apr = calculateRoundAPR(
-    round,
-    votingShare,
-    tvl,
-    balPriceUSD,
-    feeAPR,
-    tokensAPR,
-  );
-
-  if (apr.total === null || apr.breakdown.veBAL === null) {
-    Sentry.captureMessage("vebalAPR resulted in null", {
-      level: "warning",
-      extra: { balPriceUSD, tvl, votingShare, poolId, apr },
-    });
-  }
-
-  return {
-    roundId: Number(round.value),
+export const calculatePoolStats = withCache(
+  async function calculatePoolStatsFn({
+    startDate,
+    endDate,
     poolId,
-    apr,
-    balPriceUSD,
-    tvl,
-    volume,
-    votingShare,
-    symbol,
-    network,
-    collectedFeesUSD,
-    tokens: tokens as PoolTokens[],
-    type: pool.poolType as keyof typeof PoolTypeEnum,
-  };
-}
+  }: {
+    startDate: Date;
+    endDate: Date;
+    poolId: string;
+  }): Promise<calculatePoolData> {
+    const pool = new Pool(poolId);
+    const network = String(pool.network ?? 1);
+
+    // TODO: decide what to do about rounds altogether
+    const round = Round.getRoundByDate(endDate);
+
+    const [
+      balPriceUSD,
+      [tvl, volume, symbol, tokenBalance],
+      votingShare,
+      [feeAPR, collectedFeesUSD],
+      tokensAPR,
+    ] = await Promise.all([
+      getBALPriceByRound(startDate, endDate),
+      fetchPoolAveragesInRange(
+        poolId,
+        network,
+        startDate.getTime() / 1000,
+        endDate.getTime() / 1000
+      ),
+      getPoolRelativeWeight(poolId, endDate.getTime() / 1000),
+      getFeeApr(
+        poolId,
+        network,
+        startDate.getTime() / 1000,
+        endDate.getTime() / 1000
+      ),
+      //TODO: on #BAL-795 use another strategy for cache using the poolId
+      getPoolTokensAprForDate(
+        network,
+        poolId as Address,
+        //Currently, this is calculating the APR on the last day of the round.
+        //This should be changed on #BAL-799
+        round.activeRound
+          ? Math.round(new Date().getTime() / 1000)
+          : round.endDate.getTime() / 1000
+      ),
+    ]);
+
+    const tokens = await calculateTokensStats(
+      round,
+      pool.tokens,
+      network,
+      tokenBalance
+    );
+
+    const apr = calculateRoundAPR(
+      round,
+      votingShare,
+      tvl,
+      balPriceUSD,
+      feeAPR,
+      tokensAPR
+    );
+
+    if (apr.total === null || apr.breakdown.veBAL === null) {
+      Sentry.captureMessage("vebalAPR resulted in null", {
+        level: "warning",
+        extra: { balPriceUSD, tvl, votingShare, poolId, apr },
+      });
+    }
+
+    return {
+      roundId: Number(round.value),
+      poolId,
+      apr,
+      balPriceUSD,
+      tvl,
+      volume,
+      votingShare,
+      symbol,
+      network,
+      collectedFeesUSD,
+      tokens: tokens as PoolTokens[],
+      type: pool.poolType as keyof typeof PoolTypeEnum,
+    };
+  }
+);
 
 function calculateRoundAPR(
   round: Round,
@@ -212,7 +219,7 @@ function calculateRoundAPR(
   tvl: number,
   balPriceUSD: number,
   feeAPR: number,
-  tokensAPR: tokenAPR[],
+  tokensAPR: tokenAPR[]
 ) {
   const emissions = balEmissions.weekly(round.endDate.getTime() / 1000);
   const vebalAPR =
@@ -228,13 +235,12 @@ function calculateRoundAPR(
       swapFee: feeAPR,
       tokens: {
         total: tokensAPR.reduce((acc, token) => acc + token.yield, 0),
-        breakdown: [
-          ...tokensAPR.map((token) => ({
+        breakdown:
+          tokensAPR.map((token) => ({
             address: token.address,
             symbol: token.symbol,
             yield: token.yield,
           })),
-        ],
       },
     },
   };
@@ -244,7 +250,7 @@ const getFeeApr = withCache(async function getFeeAprFn(
   poolId: string,
   network: string,
   from: number,
-  to: number,
+  to: number
 ): Promise<[number, number]> {
   const lastdayBeforeStartRound = from - SECONDS_IN_DAY;
   const lastdayOfRound = to;

@@ -12,6 +12,7 @@ export default function formatAPRChartData(
   endAt?: Date,
 ): Plotly.Data[] {
   const HOVERTEMPLATE = "%{y:.2f}%";
+
   const trimmedVebalAprData = generateAndTrimAprCords(
     apiResult.perDay,
     (result) => result[0].apr.breakdown.veBAL,

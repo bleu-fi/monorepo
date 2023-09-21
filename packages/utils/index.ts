@@ -31,45 +31,55 @@ export enum NetworkChainId {
 export const networkUrls = {
   [NetworkChainId.ETHEREUM]: {
     url: "https://etherscan.io/",
+    apiUrl: "https://api.etherscan.io/api",
     name: "Etherscan",
   },
   [NetworkChainId.POLYGON]: {
     url: "https://polygonscan.com/",
+    apiUrl: "https://api.polygonscan.com/api",
     name: "Polygon Chain Explorer",
   },
   [NetworkChainId.ARBITRUM]: {
     url: "https://arbiscan.io/",
+    apiUrl: "https://api.arbiscan.io/api",
     name: "Arbitrum Chain Explorer",
   },
   [NetworkChainId.GNOSIS]: {
     url: "https://gnosisscan.io/",
+    apiUrl: "https://api.gnosisscan.io/api",
     name: "Gnosis Chain Explorer",
   },
   [NetworkChainId.OPTIMISM]: {
     url: "https://optimistic.etherscan.io/",
+    apiUrl: "https://api.optimistic.etherscan.io/api",
     name: "Optimistic Chain Explorer",
   },
   [NetworkChainId.GOERLI]: {
     url: "https://goerli.etherscan.io/",
+    apiUrl: "https://api.goerli.etherscan.io/api",
     name: "Goerli Chain Explorer",
   },
   [NetworkChainId.SEPOLIA]: {
     url: "https://sepolia.etherscan.io/",
+    apiUrl: "https://api.sepolia.etherscan.io/api",
     name: "Sepolia Chain Explorer",
   },
   [NetworkChainId.POLYGONZKEVM]: {
     url: "https://zkevm.polygonscan.com/",
+    apiUrl: "https://api.zkevm.polygonscan.com/api",
     name: "Polygon zkEVM Chain Explorer",
   },
   [NetworkChainId.BASE]: {
     url: "https://basescan.org/",
+    apiUrl: "https://api.basescan.org/api",
     name: "Base Chain Explorer",
   },
   [NetworkChainId.AVAX]: {
     url: "https://snowtrace.io/",
+    apiUrl: "https://api.snowtrace.io/api",
     name: "Avalanche C-Chain Explorer",
   },
-};
+} as const;
 
 export function buildBlockExplorerTxUrl({
   chainId,

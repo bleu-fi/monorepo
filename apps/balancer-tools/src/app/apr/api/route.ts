@@ -1,8 +1,6 @@
 /* eslint-disable no-console */
 import { NextRequest, NextResponse } from "next/server";
 
-import { getDataFromCacheOrCompute } from "#/lib/cache";
-
 import { PoolTypeEnum } from "../(utils)/types";
 import { fetchDataForPoolId } from "./(utils)/fetchDataForPoolId";
 import { fetchDataForPoolIdDateRange } from "./(utils)/fetchDataForPoolIdDateRange";
@@ -70,14 +68,14 @@ function valuesFromSearchParams(searchParams: URLSearchParams) {
       ...values,
       [key]: searchParams.getAll(key)[0],
     }),
-    {} as Record<string, Array<string> | string>,
+    {} as Record<string, Array<string> | string>
   );
 }
 
 export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl;
   const parsedParams = QueryParamsSchema.safeParse(
-    valuesFromSearchParams(searchParams),
+    valuesFromSearchParams(searchParams)
   );
 
   if (!parsedParams.success) {
@@ -85,7 +83,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(
       { error: "Invalid query parameters", details: parsedParams.error.issues },
-      { status: 400 },
+      { status: 400 }
     );
   }
 
@@ -102,27 +100,18 @@ export async function GET(request: NextRequest) {
 
   if (poolId && startAt && endAt) {
     return NextResponse.json(
-      await getDataFromCacheOrCompute(
-        `pool_${poolId}_round_${startAt}_${endAt}`,
-        async () => fetchDataForPoolIdDateRange(poolId, startAt, endAt),
-      ),
+      await fetchDataForPoolIdDateRange(poolId, startAt, endAt)
     );
   } else if (poolId) {
-    responseData = await getDataFromCacheOrCompute(
-      `fetch_pool_id_${poolId}`,
-      async () => fetchDataForPoolId(poolId),
-    );
+    responseData = await fetchDataForPoolId(poolId);
   } else if (startAt && endAt) {
-    responseData = await getDataFromCacheOrCompute(
-      `fetch_round_id_${startAt}_${endAt}`,
-      async () => fetchDataForDateRange(startAt, endAt),
-    );
+    responseData = await fetchDataForDateRange(startAt, endAt);
   }
 
   if (responseData === null || !responseData) {
     return NextResponse.json(
       { error: "error fetching data", poolId, startAt, endAt },
-      { status: 400 },
+      { status: 400 }
     );
   }
 
@@ -134,7 +123,7 @@ export async function GET(request: NextRequest) {
       sort,
       order,
       offset,
-      limit,
-    ),
+      limit
+    )
   );
 }

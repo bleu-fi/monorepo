@@ -88,6 +88,7 @@ const getAPRFromRateProviderInterval = withCache(
       console.error(
         `Error fetching rate for ${rateProviderAddress} between ${timeStart} and ${timeEnd} chain ${chainName}`,
       );
+      throw e;
     } finally {
       if (apr < 0) {
         // eslint-disable-next-line no-console
@@ -169,7 +170,7 @@ const getIntervalRates = withCache(async function getIntervalRatesFn(
     ),
   ]);
 
-  if (blockStart === undefined || blockEnd === undefined) {
+  if (!blockStart || !blockEnd) {
     // eslint-disable-next-line no-console
     console.error(
       `No blocks found between ${timeStart} and ${timeEnd} on ${chainName}`,

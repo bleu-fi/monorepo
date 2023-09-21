@@ -3,7 +3,6 @@ import {
   calculatePoolData,
   calculatePoolStats,
 } from "../../(utils)/calculatePoolStats";
-import { Round } from "../../(utils)/rounds";
 import { computeAverages } from "./computeAverages";
 import { formatDateToMMDDYYYY, generateDateRange } from "./date";
 
@@ -23,8 +22,7 @@ export async function fetchDataForPoolIdDateRange(
 
     while (attempts < MAX_RETRIES) {
       try {
-        const currentRound = Round.getRoundByDate(dayDate);
-        const data = await calculatePoolStats({ round: currentRound, poolId });
+        const data = await calculatePoolStats({ startDate, endDate, poolId });
         perDayData[formatDateToMMDDYYYY(dayDate)] = [data] || [];
         break;
       } catch (error) {
@@ -32,7 +30,7 @@ export async function fetchDataForPoolIdDateRange(
         console.error(
           `Attempt ${attempts} - Error fetching data for pool ${poolId} and date ${formatDateToMMDDYYYY(
             dayDate,
-          )}}:`,
+          )}:`,
           error,
         );
 

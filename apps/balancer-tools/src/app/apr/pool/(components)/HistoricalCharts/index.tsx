@@ -15,11 +15,11 @@ export default async function HistoricalCharts({
   endAt: Date;
   poolId?: string;
 }) {
-  const results: PoolStatsResults = await fetcher(
-    `${BASE_URL}/apr/api/?poolId=${poolId}&startAt=${formatDateToMMDDYYYY(
-      startAt,
-    )}&endAt=${formatDateToMMDDYYYY(endAt)}`,
-  );
+  const url = `${BASE_URL}/apr/api/?poolId=${poolId}&startAt=${formatDateToMMDDYYYY(
+    startAt
+  )}&endAt=${formatDateToMMDDYYYY(endAt)}`;
+
+  const results: PoolStatsResults = await fetcher(url);
 
   return (
     <HistoricalChart apiResult={results} startAt={startAt} endAt={endAt} />
@@ -29,7 +29,7 @@ export default async function HistoricalCharts({
 export function generateAndTrimAprCords(
   data: Record<string, PoolStatsData[]>, // Use Record<string, PoolStatsData[]> for the updated data format
   getValue: (result: PoolStatsData[]) => number,
-  valueToTrim: number,
+  valueToTrim: number
 ): { x: (string | number)[]; y: (string | number)[] } {
   // Change the return type accordingly
   const cords = Object.entries(data).reduce(
@@ -39,7 +39,7 @@ export function generateAndTrimAprCords(
       cords.y.push(getValue(results)); // Use map to get y values from each result
       return cords;
     },
-    { x: [], y: [] } as { x: string[]; y: number[] },
+    { x: [], y: [] } as { x: string[]; y: number[] }
   );
 
   const trimmedData = trimTrailingValues(cords.x, cords.y, valueToTrim); // No need to reverse
