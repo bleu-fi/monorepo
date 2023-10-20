@@ -1,11 +1,19 @@
 import "server-only";
 
-import { kv } from "@vercel/kv";
+// import { kv } from "@vercel/kv";
 import crypto from "crypto";
 import fs from "fs";
+import { createClient } from "redis";
 import util from "util";
 
 import { BASE_URL } from "#/app/apr/(utils)/types";
+
+const kv = await createClient({
+  // url: 'redis://localhost:6379'
+  url: process.env.REDIS_URL
+// eslint-disable-next-line no-console
+}).on('error', err => console.log('Redis Client Error', err))
+.connect();
 
 export type ComputeFn<
   T = unknown,
@@ -48,10 +56,11 @@ const promisifiedFs = {
   mkdir: util.promisify(fs.mkdir),
 };
 
-const ensureDirectoryExistence = async (filePath: string) => {
-  if (!(await promisifiedFs.exists(filePath)))
-    await promisifiedFs.mkdir(filePath, { recursive: true });
-};
+// const ensureDirectoryExistence = async (filePath: string) => {
+//   if (!(await promisifiedFs.exists(filePath)))
+//     await promisifiedFs.mkdir(filePath, { recursive: true });
+// };
+
 const handleCacheError = (error: unknown, action: string) => {
   const errorMsg = error instanceof Error ? error : new Error(String(error));
   // eslint-disable-next-line no-console
@@ -75,17 +84,17 @@ const readAndParseFile = async <T>(key: string): Promise<T | null> => {
   return null;
 };
 
-const writeToFileCache = async (key: string, data: unknown) => {
-  await ensureDirectoryExistence("./.cache");
-  try {
-    const filePath = cacheFilePath(key);
-    if (data) {
-      await promisifiedFs.writeFile(filePath, JSON.stringify(data));
-    }
-  } catch (error) {
-    handleCacheError(error, "write");
-  }
-};
+// const writeToFileCache = async (key: string, data: unknown) => {
+//   await ensureDirectoryExistence("./.cache");
+//   try {
+//     const filePath = cacheFilePath(key);
+//     if (data) {
+//       await promisifiedFs.writeFile(filePath, JSON.stringify(data));
+//     }
+//   } catch (error) {
+//     handleCacheError(error, "write");
+//   }
+// };
 
 const serializeArgs = (args: Array<unknown>) =>
   args.map((arg) => (arg ? JSON.stringify(arg) : "")).join("-");
@@ -97,10 +106,11 @@ const getFromFileCache = async <T>(key: string): Promise<T | null> => {
   return null;
 };
 
-const getFromKVCache = async <T>(key: string): Promise<T | null> => {
-  if (process.env.NODE_ENV === "production") {
+const getFromKVCache = async <T>(key: string): Promise<T| null> => {
+  if (process.env.NODE_ENV === "development") {
     try {
-      return await kv.get<T>(key);
+      const res =  await kv.get(key);
+      return res ? JSON.parse(res) : res
     } catch (error) {
       handleCacheError(error, "KV read");
     }
@@ -111,11 +121,11 @@ const getFromKVCache = async <T>(key: string): Promise<T | null> => {
 const updateAllCaches = async <T>(key: string, data: T): Promise<void> => {
   if (data !== null) {
     memoryCache[key] = data;
-    if (process.env.NODE_ENV === "development")
-      await writeToFileCache(key, data);
-    if (process.env.NODE_ENV === "production") {
+    // if (process.env.NODE_ENV === "development")
+    //   await writeToFileCache(key, data);
+    if (process.env.NODE_ENV === "development") {
       try {
-        await kv.set(key, data);
+        await kv.set(key, JSON.stringify(data));
       } catch (error) {
         handleCacheError(error, "KV write");
       }
