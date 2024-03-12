@@ -16,12 +16,6 @@ const APP_DISPLAY_NAME = "CoW AMM Manager";
 export const metadata: Metadata = {
   title: `Cow - ${APP_DISPLAY_NAME}`,
   description: "Manage your CoW AMM",
-  twitter: {
-    images: "/assets/preview-image.svg",
-  },
-  openGraph: {
-    images: "/assets/preview-image.svg",
-  },
 };
 
 const flechaS = localFont({
