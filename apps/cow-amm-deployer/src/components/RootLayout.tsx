@@ -12,7 +12,7 @@ export function RootLayout({ children }: React.PropsWithChildren) {
     <SafeProvider loader={<HomeWrapper isAmmRunning={false} goToSafe />}>
       <ToastProvider>
         <Fathom />
-        <div className="h-full w-full">{children}</div>
+        <div className="size-full">{children}</div>
       </ToastProvider>
     </SafeProvider>
   );

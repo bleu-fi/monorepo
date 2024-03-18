@@ -8,6 +8,6 @@
     "react-library.json"
   ],
   "devDependencies": {
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.2"
   }
 }

@@ -80,7 +80,9 @@ type ButtonVariant = keyof typeof PREDEFINED_CLASSES.blue;
 type ButtonShade = keyof typeof PREDEFINED_CLASSES.blue.solid;
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  extends React.PropsWithChildren<
+    React.ButtonHTMLAttributes<HTMLButtonElement>
+  > {
   color?: ButtonColor;
   variant?: ButtonVariant;
   shade?: ButtonShade;

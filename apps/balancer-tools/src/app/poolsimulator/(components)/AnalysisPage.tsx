@@ -166,7 +166,7 @@ export default function Page() {
           />
         )}
         <div>
-          <div className="flex h-full w-full flex-col lg:flex-row gap-5">
+          <div className="flex size-full flex-col lg:flex-row gap-5">
             <SwapSimulator />
             <TokensDistribution />
           </div>

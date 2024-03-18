@@ -161,7 +161,7 @@ export function SearchPoolForm({
           />
           <p className="text-sm text-tomato10">{errors.poolId?.message}</p>
           {comboBoxIsOpen && filteredPoolList && (
-            <div className="absolute z-50 my-2 flex max-h-52 flex-col gap-y-2 overflow-y-scroll rounded border-[1px] border-blue6 bg-blue3 scrollbar-thin scrollbar-track-blue2 scrollbar-thumb-slate12 w-full">
+            <div className="absolute z-50 my-2 flex max-h-52 flex-col gap-y-2 overflow-y-scroll rounded border-DEFAULT border-blue6 bg-blue3 scrollbar-thin scrollbar-track-blue2 scrollbar-thumb-slate12 w-full">
               <div className="p-2">
                 {filteredPoolList?.length > 0 && onlyVotingGauges && (
                   <div className="text-slate12 bg-amber8 w-full rounded py-1 border border-amber9 sticky top-0">

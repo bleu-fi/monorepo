@@ -46,7 +46,7 @@ export function TokenTable() {
   const tokensWithBalance = internalBalanceData?.user?.userInternalBalances;
 
   return (
-    <div className="flex h-full w-full flex-1 justify-center text-white">
+    <div className="flex size-full flex-1 justify-center text-white">
       {(internalBalanceData?.user === null ||
         tokensWithBalance?.length === 0) && (
         <div className="mt-24 flex flex-col items-center justify-center">
@@ -161,7 +161,7 @@ const transactionButtons = [
   },
   {
     icon: (
-      <div className="flex h-5 w-5 items-center justify-center rounded-full border-[1px] border-slate9">
+      <div className="flex size-5 items-center justify-center rounded-full border-DEFAULT border-slate9">
         <WidthIcon width={16} height={16} />
       </div>
     ),
@@ -191,7 +191,7 @@ function TransactionButton({
             <button
               type="button"
               title={upperFirst(operation)}
-              className="flex h-[22px] w-[22px] items-center justify-center leading-none"
+              className="flex size-[22px] items-center justify-center leading-none"
             >
               {icon}
             </button>

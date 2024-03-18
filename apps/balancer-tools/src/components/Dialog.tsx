@@ -60,7 +60,7 @@ export function Dialog({
           </div>
           <DialogPrimitive.Close asChild>
             <button
-              className="absolute right-[10px] top-[10px] inline-flex h-[30px] w-[30px] items-center justify-center text-slate12 hover:font-black	focus:shadow-[0_0_0_2px] focus:shadow-slate2 focus:outline-none"
+              className="absolute right-[10px] top-[10px] inline-flex size-[30px] items-center justify-center text-slate12 hover:font-black focus:shadow-[0_0_0_2px]	focus:shadow-slate2 focus:outline-none"
               aria-label="Close"
             >
               <Cross2Icon />

@@ -140,10 +140,7 @@ export function FormSelectPriceChecker({
                 "Quoted using the CoW API and includes fees. This value will change on the feature, since another quote will be made on order posting."
               }
             >
-              <InfoCircledIcon
-                className="w-4 h-4"
-                color={slateDarkA.slateA11}
-              />
+              <InfoCircledIcon className="size-4" color={slateDarkA.slateA11} />
             </Tooltip>
           </div>
         )}
@@ -156,7 +153,7 @@ export function FormSelectPriceChecker({
                 : "The price checker is what will define if the quoted order from CoW Swap will be posted and executed after your transaction."
             }
           >
-            <InfoCircledIcon className="w-4 h-4" color={slateDarkA.slateA11} />
+            <InfoCircledIcon className="size-4" color={slateDarkA.slateA11} />
           </Tooltip>
         </div>
         <Select
@@ -335,7 +332,7 @@ function ArrayPriceCheckerInput({
                 setLengthOfArguments(lengthOfArguments + 1);
               }}
             >
-              <PlusIcon className="w-5 h-5 items-end" />
+              <PlusIcon className="size-5 items-end" />
             </Button>
           </Table.HeaderCell>
         </Table.HeaderRow>
@@ -350,7 +347,7 @@ function ArrayPriceCheckerInput({
                       {arg.type.includes("bool") ? (
                         <div className="flex items-center justify-center gap-x-2 mt-2">
                           <input
-                            className="h-5 w-5 mt-2"
+                            className="size-5 mt-2"
                             type="checkbox"
                             key={argName}
                             defaultChecked={defaultValues?.[argName]}
@@ -392,7 +389,7 @@ function ArrayPriceCheckerInput({
                         });
                       }}
                     >
-                      <TrashIcon className="w-7 h-7" />
+                      <TrashIcon className="size-7" />
                     </button>
                   </div>
                 </Table.BodyCell>
@@ -586,7 +583,7 @@ function MetaPriceCheckerInput({
                 setOpenDialog(true);
               }}
             >
-              <PlusIcon className="w-5 h-5 items-end" />
+              <PlusIcon className="size-5 items-end" />
             </Button>
           </Table.HeaderCell>
         </Table.HeaderRow>
@@ -622,7 +619,7 @@ function MetaPriceCheckerInput({
                           setOpenDialog(true);
                         }}
                       >
-                        <Pencil1Icon className="w-7 h-7" />
+                        <Pencil1Icon className="size-7" />
                       </button>
                     </div>
                   </Table.BodyCell>
@@ -683,7 +680,7 @@ function MetaPriceCheckerInput({
                           ]);
                         }}
                       >
-                        <TrashIcon className="w-7 h-7" />
+                        <TrashIcon className="size-7" />
                       </button>
                     </div>
                   </Table.BodyCell>
@@ -817,7 +814,7 @@ function AddMetaExpectedOutCalculatorStepDialog({
                 : "The expected checker is what will define if the quoted order from CoW Swap will be posted and executed after your transaction."
             }
           >
-            <InfoCircledIcon className="w-4 h-4" color={slateDarkA.slateA11} />
+            <InfoCircledIcon className="size-4" color={slateDarkA.slateA11} />
           </Tooltip>
         </div>
         <Select

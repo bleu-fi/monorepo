@@ -60,7 +60,7 @@ export function HeaderNetworkMismatchAlert() {
 
   return (
     <div className="flex min-h-[50px] flex-row items-center justify-center bg-tomato3 text-white">
-      <ExclamationTriangleIcon className="mr-3 h-4 w-4" />
+      <ExclamationTriangleIcon className="mr-3 size-4" />
       <p className="pr-4">
         Please switch to {toTitleCase(networkFor(urlPathNetwork))}
       </p>

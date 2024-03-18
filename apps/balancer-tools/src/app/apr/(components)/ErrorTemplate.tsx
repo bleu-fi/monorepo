@@ -15,7 +15,7 @@ export default function ErrorTemplate({
   textContent: string;
 }) {
   return (
-    <div className="flex flex-1 h-full w-full flex-col justify-start rounded-3xl text-white gap-y-3">
+    <div className="flex flex-1 size-full flex-col justify-start rounded-3xl text-white gap-y-3">
       <BreadcrumbSkeleton />
       <KpisSkeleton />
       <ChartSkelton />

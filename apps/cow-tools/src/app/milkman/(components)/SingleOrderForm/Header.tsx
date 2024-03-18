@@ -28,7 +28,7 @@ export function FormHeader({
     );
   }
   return (
-    <div className="relative flex h-full w-full justify-center">
+    <div className="relative flex size-full justify-center">
       {isDraftSelectTokens ? (
         <LinkComponent
           loaderColor="amber"

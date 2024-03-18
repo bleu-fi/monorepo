@@ -54,7 +54,7 @@ export function TableRowOrder({
           content={<TransactionInfo order={order.orderEvent} />}
         >
           <button>
-            <InfoCircledIcon className="h-5 w-5 text-blue9 hover:text-blue10" />
+            <InfoCircledIcon className="size-5 text-blue9 hover:text-blue10" />
           </button>
         </Dialog>
       </Table.BodyCell>

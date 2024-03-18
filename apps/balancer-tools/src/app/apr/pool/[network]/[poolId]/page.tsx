@@ -103,7 +103,7 @@ export default async function Page({
   }
 
   return (
-    <div className="flex flex-1 h-full w-full flex-col justify-start rounded-3xl text-white gap-y-3 mb-4">
+    <div className="flex flex-1 size-full flex-col justify-start rounded-3xl text-white gap-y-3 mb-4">
       <Breadcrumb />
       <Suspense fallback={<KpisSkeleton />}>
         <PoolOverviewCards

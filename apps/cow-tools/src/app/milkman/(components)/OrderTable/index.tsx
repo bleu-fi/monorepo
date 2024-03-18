@@ -67,7 +67,7 @@ export function OrderTable() {
         <Table.HeaderCell>Status</Table.HeaderCell>
         <Table.HeaderCell>
           <button
-            className="hover:text-blue7 items-center justify-center flex w-full h-full"
+            className="hover:text-blue7 items-center justify-center flex size-full"
             onClick={() => {
               reload({ showSpinner: true });
             }}

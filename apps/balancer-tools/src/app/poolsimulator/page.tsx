@@ -53,7 +53,7 @@ export default function Page() {
   return isAnalysis ? (
     <AnalysisPage />
   ) : (
-    <div className="flex h-full w-full flex-col justify-center rounded-3xl">
+    <div className="flex size-full flex-col justify-center rounded-3xl">
       {isGraphLoading || poolDataStatus === dataStatus.NONE ? (
         <Spinner />
       ) : (

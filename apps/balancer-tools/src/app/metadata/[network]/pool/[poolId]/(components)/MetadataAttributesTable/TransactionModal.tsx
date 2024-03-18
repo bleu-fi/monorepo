@@ -41,7 +41,7 @@ function ConfirmationAlert({ handleSubmit }: { handleSubmit: () => void }) {
 
 function Loading() {
   return (
-    <div className="border-6 mx-2 h-4 w-4 animate-spin rounded-full border-solid border-amber10 border-l-slate7"></div>
+    <div className="border-6 mx-2 size-4 animate-spin rounded-full border-solid border-amber10 border-l-slate7"></div>
   );
 }
 

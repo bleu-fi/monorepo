@@ -170,7 +170,7 @@ function Row({
           </div>
         )}
       </Td>
-      <Td className="min-w-[5rem] max-w-[10rem]">
+      <Td className="min-w-20 max-w-40">
         <div className="flex justify-between">
           <ClampedText text={data.key} />
           {(!data.value || !data.description) && (
@@ -183,10 +183,10 @@ function Row({
       <Td>
         <ClampedText text={data.typename} />
       </Td>
-      <Td className="max-w-[15rem]">
+      <Td className="max-w-60">
         <ClampedText text={data.description ?? "..."} />
       </Td>
-      <Td className="min-w-[10rem]">
+      <Td className="min-w-40">
         {data.value ? (
           <div className="flex justify-between gap-2">
             <ClampedText text={data.value} />

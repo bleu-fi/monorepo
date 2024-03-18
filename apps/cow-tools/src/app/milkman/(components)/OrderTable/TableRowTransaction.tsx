@@ -169,9 +169,9 @@ export function TableRowTransaction({
         <Table.BodyCell>
           <button onClick={() => setShowOrdersRows(!showOrdersRows)}>
             {showOrdersRows ? (
-              <ChevronUpIcon className="h-5 w-5 text-blue9 hover:text-blue10" />
+              <ChevronUpIcon className="size-5 text-blue9 hover:text-blue10" />
             ) : (
-              <ChevronDownIcon className="h-5 w-5 text-blue9 hover:text-blue10" />
+              <ChevronDownIcon className="size-5 text-blue9 hover:text-blue10" />
             )}
           </button>
         </Table.BodyCell>

@@ -56,7 +56,7 @@ export default function Page() {
 
   if (!goToForm && !isAmmRunning) {
     return (
-      <div className="flex w-full justify-center h-full">
+      <div className="flex size-full justify-center">
         <div className="flex flex-col items-center gap-8 justify-center">
           <h2 className="mt-8 leading-snug text-center w-3/4 text-2xl">
             <b className="text-yellow">Attention</b>, deploying a CoW AMM

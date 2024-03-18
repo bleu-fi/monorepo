@@ -250,7 +250,7 @@ function PriceOracleFields({
                 "The AMM relies on price oracle exclusively for generating orders that will plausibly be settled in the current market conditions"
               }
             >
-              <InfoCircledIcon className="w-4 h-4" color={brownDark.brown8} />
+              <InfoCircledIcon className="size-4" color={brownDark.brown8} />
             </Tooltip>
           </div>
           <SelectInput

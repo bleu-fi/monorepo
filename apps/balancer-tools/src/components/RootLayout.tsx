@@ -20,7 +20,7 @@ export function RootLayout({ children }: React.PropsWithChildren) {
       >
         <ToastProvider>
           <Fathom />
-          <div className="h-full w-full bg-blue1">{children}</div>
+          <div className="size-full bg-blue1">{children}</div>
         </ToastProvider>
       </RainbowKitProvider>
     </WagmiConfig>

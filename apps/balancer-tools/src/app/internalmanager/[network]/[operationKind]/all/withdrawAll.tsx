@@ -97,10 +97,10 @@ export function WithdrawAll() {
     <div className="flex h-full items-center justify-center">
       <Form
         onSubmit={handleOnSubmit}
-        className="my-4 flex h-fit w-fit flex-col divide-y divide-slate7 rounded-lg border border-slate7 bg-blue3 text-white"
+        className="my-4 flex size-fit flex-col divide-y divide-slate7 rounded-lg border border-slate7 bg-blue3 text-white"
         {...form}
       >
-        <div className="relative flex h-full w-full justify-center">
+        <div className="relative flex size-full justify-center">
           <LinkComponent
             href={`/internalmanager/${network}`}
             content={

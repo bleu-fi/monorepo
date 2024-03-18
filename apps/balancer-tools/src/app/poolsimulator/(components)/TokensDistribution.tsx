@@ -50,7 +50,7 @@ export function TokensDistribution() {
             className="flex items-center justify-center gap-x-1 text-sm"
           >
             <div
-              className="h-3 w-3 rounded-full"
+              className="size-3 rounded-full"
               style={{ backgroundColor: colors[index] }}
             />
             {token.symbol}

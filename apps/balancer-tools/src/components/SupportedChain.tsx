@@ -10,7 +10,7 @@ export function CheckSupportedChains({
 }>) {
   if (supportedChains && chainName && !supportedChains.includes(chainName)) {
     return (
-      <div className="flex h-full w-full flex-col items-center justify-center p-5 text-center">
+      <div className="flex size-full flex-col items-center justify-center p-5 text-center">
         <div className="text-3xl font-bold text-white">
           Currently, this app doesn't have support for {chainName}
         </div>

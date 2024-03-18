@@ -37,12 +37,12 @@
   "homepage": "https://github.com/bleu-fi/monorepo#readme",
   "devDependencies": {
     "@bleu-fi/eslint-config": "workspace:*",
-    "@types/node": "^20.11.24",
+    "@types/node": "^20.11.28",
     "concurrently": "^8.2.2",
     "ghooks": "^2.0.4",
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.2"
   },
   "pnpm": {
     "overrides": {

@@ -28,9 +28,9 @@ export function FormWrapper({
   const backHref =
     transactionType === TRANSACTION_TYPES.CREATE_COW_AMM ? "/" : "/manager";
   return (
-    <div className="flex h-full items-center justify-center w-full">
+    <div className="flex size-full items-center justify-center">
       <div className="my-4 flex flex-col border-2 border-foreground bg-card border-card-foreground text-card-foreground">
-        <div className="relative flex h-full w-full justify-center">
+        <div className="relative flex size-full justify-center">
           <LinkComponent
             href={backHref}
             content={
@@ -48,7 +48,7 @@ export function FormWrapper({
             </div>
           </div>
         </div>
-        <div className="flex flex-col overflow-auto w-full h-full max-h-[550px]">
+        <div className="flex flex-col overflow-auto size-full max-h-[550px]">
           <AmmForm
             defaultValues={defaultValues}
             transactionType={transactionType}

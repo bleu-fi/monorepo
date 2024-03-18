@@ -21,7 +21,7 @@ export function HomeWrapper({
       : "Create a CoW AMM";
 
   return (
-    <div className="flex w-full justify-center h-full">
+    <div className="flex size-full justify-center">
       <div className="flex flex-col items-center gap-8 justify-center">
         <Image
           src="/assets/cow-amm.svg"

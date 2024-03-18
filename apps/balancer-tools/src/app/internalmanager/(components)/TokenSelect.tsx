@@ -235,7 +235,7 @@ function TokenModal({
   }
   return (
     <div className="max-h-[30rem] divide-y divide-slate7 overflow-y-scroll text-white scrollbar-thin scrollbar-track-blue3 scrollbar-thumb-slate12">
-      <div className="flex h-full w-full flex-col items-center justify-center gap-y-4 py-4">
+      <div className="flex size-full flex-col items-center justify-center gap-y-4 py-4">
         <div className="text-xl">Token Search</div>
         <div className="flex w-full items-center px-10">
           <input

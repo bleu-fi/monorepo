@@ -85,7 +85,7 @@ export function PoolCompositionTable({ cowAmm }: { cowAmm: ICowAmm }) {
 function PriceErrorTooltip() {
   return (
     <Tooltip content="Error fetching token USD price">
-      <InfoCircledIcon className="w-4 h-4" color={tomatoDark.tomato10} />
+      <InfoCircledIcon className="size-4" color={tomatoDark.tomato10} />
     </Tooltip>
   );
 }

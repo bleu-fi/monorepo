@@ -158,7 +158,7 @@ export function MoreFiltersButton() {
             className="PopoverContent"
             sideOffset={5}
           >
-            <div className="p-2 flex overflow-y-scroll rounded border-[1px] border-blue6 bg-blue3 scrollbar-thin scrollbar-track-blue2 scrollbar-thumb-slate12 w-60">
+            <div className="p-2 flex overflow-y-scroll rounded border-DEFAULT border-blue6 bg-blue3 scrollbar-thin scrollbar-track-blue2 scrollbar-thumb-slate12 w-60">
               <Accordion.Root className="w-full" type="single" collapsible>
                 {filters.map(({ name, label, options }) => (
                   <AccordionItem value={label} key={label}>

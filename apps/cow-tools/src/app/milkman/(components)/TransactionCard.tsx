@@ -99,7 +99,7 @@ export function TransactionCard({
   };
 
   return (
-    <div className="flex h-full items-center justify-center w-full">
+    <div className="flex size-full items-center justify-center">
       <div className="my-4 flex flex-col rounded-lg border border-slate7 bg-blue3 text-white">
         <div className="divide-y divide-slate7 h-full">
           <FormHeader
@@ -107,7 +107,7 @@ export function TransactionCard({
             network={network}
             onClick={handleBack}
           />
-          <div className="flex flex-col overflow-auto w-full h-full max-h-[550px]">
+          <div className="flex flex-col overflow-auto size-full max-h-[550px]">
             {FORM_CONTENTS[transactionStatus]}
           </div>
         </div>

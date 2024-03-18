@@ -54,7 +54,7 @@ export default function Page({
 
   if (network !== params.network) {
     return (
-      <div className="flex h-full w-full flex-col items-center rounded-3xl px-12 py-16 md:py-20">
+      <div className="flex size-full flex-col items-center rounded-3xl px-12 py-16 md:py-20">
         <div className="text-center text-3xl text-amber9">
           You are on the wrong network
         </div>
@@ -115,8 +115,8 @@ function TransactionCard({
 
   return (
     <div className="flex h-full items-center justify-center">
-      <form className="my-4 flex h-fit w-fit flex-col divide-y divide-slate7 rounded-lg border border-slate7 bg-blue3 text-white">
-        <div className="relative flex h-full w-full justify-center">
+      <form className="my-4 flex size-fit flex-col divide-y divide-slate7 rounded-lg border border-slate7 bg-blue3 text-white">
+        <div className="relative flex size-full justify-center">
           <LinkComponent
             href={`/internalmanager/${network}`}
             content={

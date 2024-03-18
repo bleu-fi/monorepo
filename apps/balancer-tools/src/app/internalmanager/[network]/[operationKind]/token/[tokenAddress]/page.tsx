@@ -121,7 +121,7 @@ export default function Page({
 
   if (network !== params.network) {
     return (
-      <div className="flex h-full w-full flex-col items-center rounded-3xl px-12 py-16 md:py-20">
+      <div className="flex size-full flex-col items-center rounded-3xl px-12 py-16 md:py-20">
         <div className="text-center text-3xl text-amber9">
           You are on the wrong network
         </div>
@@ -140,7 +140,7 @@ export default function Page({
       walletAmount?.value.toString() === "0")
   ) {
     return (
-      <div className="flex h-full w-full flex-col items-center rounded-3xl px-12 py-16 md:py-20">
+      <div className="flex size-full flex-col items-center rounded-3xl px-12 py-16 md:py-20">
         <div className="text-center text-3xl text-amber9">
           Looks like you don't have this token
         </div>
@@ -296,9 +296,9 @@ function TransactionCard({
       <Form
         {...form}
         onSubmit={handleOnSubmit}
-        className="my-4 flex h-fit w-fit flex-col divide-y divide-slate7 rounded-lg border border-slate7 bg-blue3 text-white"
+        className="my-4 flex size-fit flex-col divide-y divide-slate7 rounded-lg border border-slate7 bg-blue3 text-white"
       >
-        <div className="relative flex h-full w-full justify-center">
+        <div className="relative flex size-full justify-center">
           <LinkComponent
             loaderColor="amber"
             href={`/internalmanager/${network}`}

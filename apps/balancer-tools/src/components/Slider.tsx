@@ -56,7 +56,7 @@ const BaseSlider = React.forwardRef<
         <SliderPrimitive.Range className="absolute bg-blue7 rounded-full h-full" />
       </SliderPrimitive.Track>
       <SliderPrimitive.Thumb
-        className="block w-5 h-5 bg-blue7 shadow-[0_2px_10px] shadow-blackA7 rounded-[10px] hover:bg-violet3 focus:outline-none focus:shadow-[0_0_0_5px] focus:shadow-blackA8"
+        className="block size-5 bg-blue7 shadow-[0_2px_10px] shadow-blackA7 rounded-[10px] hover:bg-violet3 focus:outline-none focus:shadow-[0_0_0_5px] focus:shadow-blackA8"
         aria-label="slider-thumb"
       >
         <h1 className="absolute ease-in-out duration-150 opacity-100 -translate-y-8 -translate-x-6 px-5 py-1 bg-blue7 text-center rounded-full text-white whitespace-nowrap text-xs font-bold">

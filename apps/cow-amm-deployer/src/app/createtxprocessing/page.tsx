@@ -35,7 +35,7 @@ export default function Page() {
   }, []);
 
   return (
-    <div className="flex h-full w-full flex-col items-center px-12 py-16 md:py-20">
+    <div className="flex size-full flex-col items-center px-12 py-16 md:py-20">
       <div className="text-center text-3xl text-yellow/30">
         The transaction is being processed
       </div>
