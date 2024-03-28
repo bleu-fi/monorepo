@@ -1,5 +1,5 @@
 import { Address } from "@bleu-fi/utils";
-import { goerli, mainnet } from "viem/chains";
+import { mainnet, sepolia } from "viem/chains";
 
 import { ChainId } from "#/utils/chainsPublicClients";
 import { cowTokenList } from "#/utils/cowTokenList";
@@ -19,11 +19,11 @@ export async function fetchTokenUsdPrice({
   amount: number;
   chainId: ChainId;
 }): Promise<number | undefined> {
-  const chainIdCoinGecko = chainId === goerli.id ? mainnet.id : chainId;
+  const chainIdCoinGecko = chainId === sepolia.id ? mainnet.id : chainId;
 
-  // since coingecko can't handle goerli tokens, we use the ethereum version of the token to test
+  // since coingecko can't handle testnet tokens, we use the ethereum version of the token to test
   const address =
-    chainId === goerli.id
+    chainId === sepolia.id
       ? cowTokenList.find(
           (cowToken) =>
             cowToken.symbol === token.symbol &&

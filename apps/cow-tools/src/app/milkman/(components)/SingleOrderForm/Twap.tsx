@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { Controller, FieldValues, useForm } from "react-hook-form";
-import { gnosis, goerli, mainnet } from "viem/chains";
+import { gnosis, mainnet, sepolia } from "viem/chains";
 
 import { AlertCard } from "#/components/AlertCard";
 import { Checkbox } from "#/components/Checkbox";
@@ -35,7 +35,7 @@ export const TwapDelayValues = {
 };
 
 const minValueForTwapWarining = {
-  [goerli.id]: 100,
+  [sepolia.id]: 100,
   [gnosis.id]: 500,
   [mainnet.id]: 50_000,
 };

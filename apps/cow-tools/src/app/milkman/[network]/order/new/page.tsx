@@ -2,7 +2,7 @@
 
 import { Address, Network } from "@bleu-fi/utils";
 import { useSafeAppsSDK } from "@gnosis.pm/safe-apps-react-sdk";
-import { gnosis, goerli, mainnet } from "viem/chains";
+import { gnosis, mainnet, sepolia } from "viem/chains";
 
 import { TransactionCard } from "#/app/milkman/(components)/TransactionCard";
 import WalletNotConnected from "#/components/WalletNotConnected";
@@ -30,7 +30,7 @@ export default function Page({
 
   if (
     safe.chainId !== mainnet.id &&
-    safe.chainId !== goerli.id &&
+    safe.chainId !== sepolia.id &&
     safe.chainId !== gnosis.id
   ) {
     return (

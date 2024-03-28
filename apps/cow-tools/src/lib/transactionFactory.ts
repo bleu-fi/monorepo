@@ -16,7 +16,7 @@ import {
 } from "./priceCheckersMappings";
 import { argType, PRICE_CHECKERS } from "./types";
 
-// Milkman's address is the same for all chains supported chains (mainnet and goerli)
+// Milkman's address is the same for all chains supported chains (mainnet, goerli, sepolia, and gnosis)
 export const MILKMAN_ADDRESS = "0x11C76AD590ABDFFCD980afEC9ad951B160F02797";
 
 export enum TRANSACTION_TYPES {

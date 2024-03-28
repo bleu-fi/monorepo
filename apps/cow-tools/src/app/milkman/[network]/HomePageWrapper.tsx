@@ -7,7 +7,7 @@ import {
 } from "@bleu-fi/utils";
 import { useSafeAppsSDK } from "@gnosis.pm/safe-apps-react-sdk";
 import { PlusIcon } from "@radix-ui/react-icons";
-import { gnosis, goerli, mainnet } from "viem/chains";
+import { gnosis, mainnet, sepolia } from "viem/chains";
 
 import { Button } from "#/components";
 import { LinkComponent } from "#/components/Link";
@@ -30,7 +30,7 @@ export function HomePageWrapper({
 
   if (
     safe.chainId !== mainnet.id &&
-    safe.chainId !== goerli.id &&
+    safe.chainId !== sepolia.id &&
     safe.chainId !== gnosis.id
   ) {
     return (
